@@ -1,0 +1,29 @@
+{
+  "name": "mcp-marketing-analytics",
+  "version": "1.0.0",
+  "description": "MCP server for GA4, Google Search Console, Meta Ads, and Google Ads",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "setup": "tsx scripts/setup-auth.ts",
+    "inspector": "npx @modelcontextprotocol/inspector dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.25.0",
+    "googleapis": "^146.0.0",
+    "google-auth-library": "^9.15.0",
+    "facebook-nodejs-business-sdk": "^22.0.0",
+    "google-ads-api": "^21.0.0",
+    "dotenv": "^16.4.0",
+    "open": "^10.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0"
+  }
+}
