@@ -36,7 +36,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
     "ga4_run_report",
     "Run a custom GA4 report with specified dimensions, metrics, and date range. Use GA4 API names like 'activeUsers', 'sessions', 'pagePath', 'sessionSource'. Dates: YYYY-MM-DD or relative like '7daysAgo', '30daysAgo', 'today', 'yesterday'.",
     {
-      propertyId: z.string().optional().describe("GA4 Property ID (e.g. '306670309'). Use ga4_list_accounts to find available properties. If omitted, uses the default from env."),
+      propertyId: z.string().optional().describe("GA4 Property ID (e.g. '123456789'). Use ga4_list_accounts to find available properties. If omitted, uses the default from env."),
       dimensions: z.array(z.string()).describe("GA4 dimension names, e.g. ['pagePath', 'sessionSource']"),
       metrics: z.array(z.string()).describe("GA4 metric names, e.g. ['activeUsers', 'sessions', 'screenPageViews']"),
       startDate: z.string().default("28daysAgo").describe("Start date (YYYY-MM-DD or relative)"),
