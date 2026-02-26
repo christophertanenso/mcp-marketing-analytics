@@ -1,4 +1,6 @@
 import type { ToolResponse } from "../types/index.js";
+import type { AppConfig } from "../types/index.js";
+import { type ApiFamily, setupInstructionsFor } from "./setup-guides.js";
 
 export function errorResponse(message: string): ToolResponse {
   return {
@@ -7,12 +9,10 @@ export function errorResponse(message: string): ToolResponse {
   };
 }
 
-export function notConfiguredResponse(apiName: string): ToolResponse {
+export function notConfiguredResponse(apiFamily: ApiFamily, config: AppConfig): ToolResponse {
+  const text = setupInstructionsFor(apiFamily, config);
   return {
-    content: [{
-      type: "text",
-      text: `${apiName} is not configured. Please set the required environment variables in your .env file.\nRun "npm run setup" for an interactive guide.`,
-    }],
+    content: [{ type: "text", text }],
     isError: true,
   };
 }

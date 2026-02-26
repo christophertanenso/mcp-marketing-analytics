@@ -2,7 +2,12 @@
 
 A Model Context Protocol (MCP) server that gives Claude access to **Google Analytics 4**, **Google Search Console**, **Meta Ads**, and **Google Ads**. Ask Claude about your marketing data in natural language.
 
-## Tools (22 total)
+## Tools (23 total)
+
+### Setup
+| Tool | Description |
+|------|-------------|
+| `setup_guide` | Step-by-step setup instructions — shows what's configured and guides you through any missing API credentials |
 
 ### Google Analytics 4 (6 tools)
 | Tool | Description |

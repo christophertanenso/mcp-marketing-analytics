@@ -23,7 +23,7 @@ export function registerMetaTools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(25).describe("Max accounts to return"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Meta Ads");
+      if (!isConfigured) return notConfiguredResponse("meta", config);
       return handleToolError(async () => {
         const text = await listAdAccounts(params.limit ?? 25);
         return { content: [{ type: "text" as const, text }] };
@@ -41,7 +41,7 @@ export function registerMetaTools(server: McpServer, config: AppConfig): void {
       breakdown: z.enum(["none", "age", "gender", "country", "placement", "device_platform"]).optional().default("none").describe("Optional breakdown dimension"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Meta Ads");
+      if (!isConfigured) return notConfiguredResponse("meta", config);
       return handleToolError(async () => {
         const text = await getAccountOverview(
           params.accountId,
@@ -65,7 +65,7 @@ export function registerMetaTools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(25).describe("Max campaigns to return"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Meta Ads");
+      if (!isConfigured) return notConfiguredResponse("meta", config);
       return handleToolError(async () => {
         const text = await getCampaignInsights(
           params.accountId,
@@ -90,7 +90,7 @@ export function registerMetaTools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(25).describe("Max ad sets to return"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Meta Ads");
+      if (!isConfigured) return notConfiguredResponse("meta", config);
       return handleToolError(async () => {
         const text = await getAdsetInsights(
           params.accountId,
@@ -116,7 +116,7 @@ export function registerMetaTools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(25).describe("Max ads to return"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Meta Ads");
+      if (!isConfigured) return notConfiguredResponse("meta", config);
       return handleToolError(async () => {
         const text = await getAdInsights(
           params.accountId,

@@ -23,7 +23,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
     "List all Search Console sites/properties accessible to the authenticated Google account. Use this to discover Site URLs for use with other gsc_* tools.",
     {},
     async () => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       return handleToolError(async () => {
         const client = getWebmastersClient(config.google!);
         const text = await listSites(client);
@@ -47,7 +47,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
       filterExpression: z.string().optional().describe("Filter expression/value"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const site = resolveSiteUrl(params.siteUrl);
       if (!site) return errorResponse("No Site URL provided. Use gsc_list_sites to find your site, then pass it as siteUrl.");
       return handleToolError(async () => {
@@ -79,7 +79,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
       pageFilter: z.string().optional().describe("Filter to queries for a specific page URL (contains match)"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const site = resolveSiteUrl(params.siteUrl);
       if (!site) return errorResponse("No Site URL provided. Use gsc_list_sites to find your site.");
       return handleToolError(async () => {
@@ -106,7 +106,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
       queryFilter: z.string().optional().describe("Filter to pages matching a specific query (contains match)"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const site = resolveSiteUrl(params.siteUrl);
       if (!site) return errorResponse("No Site URL provided. Use gsc_list_sites to find your site.");
       return handleToolError(async () => {
@@ -130,7 +130,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
       url: z.string().describe("The fully qualified URL to inspect, e.g. https://example.com/page"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const site = resolveSiteUrl(params.siteUrl);
       if (!site) return errorResponse("No Site URL provided. Use gsc_list_sites to find your site.");
       return handleToolError(async () => {
@@ -148,7 +148,7 @@ export function registerGSCTools(server: McpServer, config: AppConfig): void {
       siteUrl: z.string().optional().describe("Site URL. Use gsc_list_sites to find available sites."),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const site = resolveSiteUrl(params.siteUrl);
       if (!site) return errorResponse("No Site URL provided. Use gsc_list_sites to find your site.");
       return handleToolError(async () => {

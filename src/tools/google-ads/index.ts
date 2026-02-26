@@ -38,7 +38,7 @@ export function registerGoogleAdsTools(server: McpServer, config: AppConfig): vo
       query: z.string().describe("A valid GAQL query string"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Google Ads");
+      if (!isConfigured) return notConfiguredResponse("googleAds", config);
       return handleToolError(async () => {
         const customer = getCustomer(config);
         const text = await executeQuery(customer, params.query);
@@ -58,7 +58,7 @@ export function registerGoogleAdsTools(server: McpServer, config: AppConfig): vo
       orderBy: z.enum(["cost", "clicks", "conversions", "impressions"]).optional().default("cost").describe("Sort by metric"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Google Ads");
+      if (!isConfigured) return notConfiguredResponse("googleAds", config);
       return handleToolError(async () => {
         const customer = getCustomer(config);
         const text = await getCampaignPerformance(customer, {
@@ -83,7 +83,7 @@ export function registerGoogleAdsTools(server: McpServer, config: AppConfig): vo
       orderBy: z.enum(["cost", "clicks", "conversions", "impressions"]).optional().default("clicks").describe("Sort by metric"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Google Ads");
+      if (!isConfigured) return notConfiguredResponse("googleAds", config);
       return handleToolError(async () => {
         const customer = getCustomer(config);
         const text = await getKeywordPerformance(customer, {
@@ -107,7 +107,7 @@ export function registerGoogleAdsTools(server: McpServer, config: AppConfig): vo
       orderBy: z.enum(["cost", "clicks", "conversions", "impressions"]).optional().default("cost").describe("Sort by metric"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Google Ads");
+      if (!isConfigured) return notConfiguredResponse("googleAds", config);
       return handleToolError(async () => {
         const customer = getCustomer(config);
         const text = await getAdGroupPerformance(customer, {
@@ -128,7 +128,7 @@ export function registerGoogleAdsTools(server: McpServer, config: AppConfig): vo
       dateRange: z.enum(DATE_RANGES).default("LAST_30_DAYS").describe("Predefined date range"),
     },
     async (params) => {
-      if (!isConfigured) return notConfiguredResponse("Google Ads");
+      if (!isConfigured) return notConfiguredResponse("googleAds", config);
       return handleToolError(async () => {
         const customer = getCustomer(config);
         const text = await getAccountSummary(customer, params.dateRange);

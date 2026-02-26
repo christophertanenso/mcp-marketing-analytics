@@ -23,7 +23,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
     "List all GA4 properties accessible to the authenticated Google account. Use this to discover Property IDs for use with other ga4_* tools.",
     {},
     async () => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       return handleToolError(async () => {
         const auth = getGoogleOAuth2Client(config.google!);
         const text = await listGA4Accounts(auth);
@@ -47,7 +47,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
       filterValue: z.string().optional().describe("Filter value"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const propId = resolvePropertyId(params.propertyId);
       if (!propId) return errorResponse("No Property ID provided. Use ga4_list_accounts to find your Property ID, then pass it as propertyId.");
       return handleToolError(async () => {
@@ -77,7 +77,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(10).describe("Max rows to return"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const propId = resolvePropertyId(params.propertyId);
       if (!propId) return errorResponse("No Property ID provided. Use ga4_list_accounts to find your Property ID.");
       return handleToolError(async () => {
@@ -102,7 +102,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(20).describe("Max rows to return"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const propId = resolvePropertyId(params.propertyId);
       if (!propId) return errorResponse("No Property ID provided. Use ga4_list_accounts to find your Property ID.");
       return handleToolError(async () => {
@@ -127,7 +127,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
       limit: z.number().optional().default(20).describe("Max rows to return"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const propId = resolvePropertyId(params.propertyId);
       if (!propId) return errorResponse("No Property ID provided. Use ga4_list_accounts to find your Property ID.");
       return handleToolError(async () => {
@@ -152,7 +152,7 @@ export function registerGA4Tools(server: McpServer, config: AppConfig): void {
       comparePreviousPeriod: z.boolean().optional().default(false).describe("If true, also fetches the previous period of the same length for comparison"),
     },
     async (params) => {
-      if (!hasGoogleAuth) return notConfiguredResponse("Google OAuth2");
+      if (!hasGoogleAuth) return notConfiguredResponse("google", config);
       const propId = resolvePropertyId(params.propertyId);
       if (!propId) return errorResponse("No Property ID provided. Use ga4_list_accounts to find your Property ID.");
       return handleToolError(async () => {
